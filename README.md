@@ -23,15 +23,3 @@ We prioritized predictable loading behavior and a small number of API calls with
 
 The stack (React, Jotai, TanStack Query, TanStack Router) keeps server state in queries and UI/route state in atoms and the URL. The detail page uses query params so links are shareable; list and detail both use the same query/atom patterns for consistency and cacheability.
 
-**Submission:** Share the repository link with **matt@akk.io** and **nadia@akk.io** per the assessment instructions.
-
----
-
-### Creating the demo GIF
-
-From the project root, with [ffmpeg](https://ffmpeg.org/) installed (e.g. `brew install ffmpeg`), convert a screen recording to an animated GIF and save it as `assets/screen-recording.gif`:
-
-```bash
-# Replace INPUT.mov with your recording path (e.g. from Desktop)
-ffmpeg -i "INPUT.mov" -vf "fps=10,scale=720:-1:flags=lanczos,split[s0][s1];[s0]palettegen[p];[s1][p]paletteuse" -loop 0 assets/screen-recording.gif
-```
