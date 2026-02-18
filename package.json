@@ -1,0 +1,44 @@
+{
+  "name": "akkio-coding-test",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc --noEmit && vite build",
+    "lint": "eslint .",
+    "preview": "vite preview",
+    "test": "pnpm run test:types && pnpm run test:lint && pnpm run test:format && pnpm run test:spec",
+    "test:watch": "vitest",
+    "test:types": "tsc --noEmit",
+    "test:lint": "eslint .",
+    "test:format": "prettier --check src __TESTS__",
+    "test:spec": "vitest run"
+  },
+  "dependencies": {
+    "@tanstack/react-query": "^5.90.21",
+    "@tanstack/react-router": "^1.95.0",
+    "jotai": "^2.17.1",
+    "jotai-tanstack-query": "^0.11.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.13.0",
+    "@testing-library/jest-dom": "^6.9.1",
+    "@testing-library/react": "^16.0.0",
+    "@types/react": "^18.3.12",
+    "@types/react-dom": "^18.3.1",
+    "@vitejs/plugin-react": "^4.3.3",
+    "eslint": "^9.13.0",
+    "eslint-plugin-react-hooks": "^5.0.0",
+    "eslint-plugin-react-refresh": "^0.4.14",
+    "globals": "^15.11.0",
+    "jsdom": "^25.0.0",
+    "prettier": "^3.8.1",
+    "typescript": "~5.6.2",
+    "typescript-eslint": "^8.11.0",
+    "vite": "^5.4.10",
+    "vitest": "^2.1.0"
+  }
+}
