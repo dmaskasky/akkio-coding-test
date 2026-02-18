@@ -1,7 +1,24 @@
 import { useAtomValue } from "jotai";
-import { colorSwatchesQueryAtom } from "../atoms/colorSwatches";
+import { showSpinnerAtom } from "../atoms/colorSwatches";
 import { SaturationLightnessControls } from "../components/SaturationLightnessControls";
 import { ColorSwatchGrid } from "../components/ColorSwatchGrid";
+
+function ControlsHrWithSpinner() {
+  const showSpinner = useAtomValue(showSpinnerAtom);
+
+  return (
+    <div className="controls-hr-wrap">
+      <hr className="controls-hr" />
+      {showSpinner ? (
+        <div
+          className="loading-spinner"
+          role="progressbar"
+          aria-valuetext="Loading colors"
+        />
+      ) : null}
+    </div>
+  );
+}
 
 function SwatchListHeader() {
   return (
@@ -20,19 +37,20 @@ function SwatchListHeader() {
         ).
       </p>
       <SaturationLightnessControls />
-      <hr className="controls-hr" />
+      <ControlsHrWithSpinner />
     </header>
   );
 }
 
 function SwatchListGrid() {
-  const query = useAtomValue(colorSwatchesQueryAtom);
+  const isBusy = useAtomValue(showSpinnerAtom);
+
   return (
     <main
       id="main-content"
       className="main"
       aria-label="Color swatches"
-      aria-busy={query.isPending}
+      aria-busy={isBusy}
     >
       <ColorSwatchGrid />
     </main>
@@ -97,10 +115,43 @@ export function SwatchListPage() {
             line-height: 1.4em;
           }
 
-          .controls-hr {
+          .controls-hr-wrap {
+            position: relative;
             margin: 1.25rem 0 0 0;
+            overflow: visible;
+          }
+
+          .controls-hr {
             border: 0;
             border-top: 1px solid #ddd;
+            margin: 0;
+          }
+
+          .loading-spinner {
+            position: absolute;
+            top: -2px;
+            left: 0;
+            right: 0;
+            height: 4px;
+            pointer-events: none;
+            background: linear-gradient(
+              90deg,
+              transparent 0%,
+              var(--accent) 20%,
+              var(--accent) 80%,
+              transparent 100%
+            );
+            background-size: 200% 100%;
+            animation: loading-spinner-shift 1.8s ease-in-out infinite;
+          }
+
+          @keyframes loading-spinner-shift {
+            0% {
+              background-position: 200% 0;
+            }
+            100% {
+              background-position: -200% 0;
+            }
           }
 
           .main {

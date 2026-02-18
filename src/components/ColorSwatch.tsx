@@ -7,14 +7,19 @@ type ColorSwatchProps = {
   search?: { hex: string; format?: string };
 };
 
+function formatRgb(rgb: { r: number; g: number; b: number }): string {
+  return `${rgb.r}, ${rgb.g}, ${rgb.b}`;
+}
+
 export function ColorSwatch({ swatch, to, search }: ColorSwatchProps) {
-  const { name, hex } = swatch;
+  const { name, hex, rgb } = swatch;
 
   const content = (
     <>
       <div className="patch" style={{ backgroundColor: hex }} />
       <div className="label-space">
         <span className="label">{name}</span>
+        <span className="rgb">{formatRgb(rgb)}</span>
       </div>
     </>
   );
@@ -52,7 +57,7 @@ export function ColorSwatch({ swatch, to, search }: ColorSwatchProps) {
 
         .label-space {
           position: relative;
-          min-height: 1.4em;
+          min-height: 2.8em;
           padding: 0.5rem 0 0;
           font-size: 14px;
           line-height: 1.4em;
@@ -68,6 +73,17 @@ export function ColorSwatch({ swatch, to, search }: ColorSwatchProps) {
           font-weight: 600;
           color: #607340;
           text-decoration: none;
+          text-align: center;
+        }
+
+        .rgb {
+          position: absolute;
+          left: 50%;
+          transform: translateX(-50%);
+          top: 1.5rem;
+          white-space: nowrap;
+          font-size: 12px;
+          color: #666;
           text-align: center;
         }
       }

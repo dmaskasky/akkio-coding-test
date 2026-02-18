@@ -1,18 +1,11 @@
 import { useAtomValue } from "jotai";
 import { ColorSwatch } from "./ColorSwatch";
-import { colorSwatchesQueryAtom } from "../atoms/colorSwatches";
+import { colorSwatchesGridStateAtom } from "../atoms/colorSwatches";
 
 export function ColorSwatchGrid() {
-  const query = useAtomValue(colorSwatchesQueryAtom);
-  const { data, isPending, error } = query;
-  const swatches = data ?? [];
-  const hasSwatches = swatches.length > 0;
-  const errorMessage =
-    error instanceof Error
-      ? error.message
-      : error
-        ? "Failed to load colors"
-        : null;
+  const { swatches, hasSwatches, errorMessage, isPending } = useAtomValue(
+    colorSwatchesGridStateAtom,
+  );
 
   return (
     <div
